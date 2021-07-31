@@ -138,13 +138,17 @@ public class App {
                 voltarMenu(in);
                 continue;
             }
+            double valorMedioDasVendas = 0;
+            double quantidadeDeProdutosVendidosNoPeriodo = 0;
+            double somaDoValorDasVendas = 0;
             boolean vendaEncontada = false;
             System.out.println("Informe o período que deseja consultar: ");
             String dataConsultada = in.nextLine();
             for (Venda venda : vendas) {
                 if (dataConsultada.equals(venda.getDataDaVenda())){
                  vendasRealizadas.add(venda);  
-                vendaEncontada = true;  
+                 vendaEncontada = true;  
+                 quantidadeDeProdutosVendidosNoPeriodo = quantidadeDeProdutosVendidosNoPeriodo + 1;
                 }
             
             }
@@ -159,13 +163,21 @@ public class App {
                 System.out.println("====================================");
                 Thread.sleep(1000);
                 for (int i=0; i < vendasRealizadas.size(); i++){
+                    somaDoValorDasVendas = somaDoValorDasVendas + (vendasRealizadas.get(i).getQuantidadeVendida() * vendasRealizadas.get(i).getProdutoVendido().getValor());
                     System.out.println("");
                     System.out.printf("Data da venda: %s\n", vendasRealizadas.get(i).getDataDaVenda());
                     System.out.printf("Nome do produto: %s\n", vendasRealizadas.get(i).getProdutoVendido().getNome());
                     System.out.printf("Valor unitário: R$ %s\n", vendasRealizadas.get(i).getProdutoVendido().getValor());
                     System.out.println("Valor total da venda: R$ " + (vendasRealizadas.get(i).getQuantidadeVendida() * vendasRealizadas.get(i).getProdutoVendido().getValor()) );
                     Thread.sleep(1000);
-            }
+                }
+                valorMedioDasVendas = somaDoValorDasVendas/quantidadeDeProdutosVendidosNoPeriodo;
+                System.out.println("=======================================");
+                System.out.println("VALOR MÉDIO DAS VENDAS DO PERÍODO");
+                System.out.printf("Valor médio: R$ %s\n", valorMedioDasVendas);
+                System.out.println("Pressione ENTER para continuar");
+                vendasRealizadas.removeAll(vendas);
+                in.nextLine();
         }
         }else if (opcao == 5) {
             if (produtos.isEmpty()){
@@ -179,7 +191,7 @@ public class App {
             System.out.println("Informe a data: XX/YY/ZZZZ");
             venda1.setDataDaVenda(in.nextLine());
                 }catch(InputMismatchException ex){
-                    System.out.println(ex.getMessage() + "Tente Novamente");
+                    System.out.println(ex.getMessage() + " Tente Novamente");
                 }
             } while (venda1.getDataDaVenda() == null);
             System.out.println("Informe o código do produto: ");
