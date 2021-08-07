@@ -41,12 +41,12 @@ public class App {
             Produto produto = new Produto();
             do{
                 try{
-                System.out.println("Informe o código do produto: ");
-                produto.setCodigo(in.nextLine());
+                    System.out.println("Informe o código do produto: ");
+                    produto.setCodigo(in.nextLine());
                 }catch(InputMismatchException ex){
                     System.out.println(ex.getMessage() + "Tente novamente");
                 }
-            } while(produto.getCodigo() == null);    
+            } while(produto.getCodigo() == null || produto.getCodigo().equals(""));    
             System.out.println("Informe o nome do produto: ");
             produto.setNome(in.nextLine());
             System.out.println("Informe o valor do produto: ");
@@ -244,7 +244,7 @@ public class App {
     
     } while (opcao != 0);  
 
-
+    in.close();
     }
 
 

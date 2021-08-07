@@ -13,10 +13,10 @@ public class Produto {
         return codigo;
     }
     public void setCodigo(String codigo) {
-        if (codigo != null){
-        this.codigo = codigo;
+        if (codigo != null && !codigo.equals("")){
+            this.codigo = codigo;
         }else {
-        throw new InputMismatchException("O código não pode ser nulo!");    
+            throw new InputMismatchException("O código não pode ser nulo!");    
         }
     }    
     public String getNome() {
